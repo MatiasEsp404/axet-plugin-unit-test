@@ -1,0 +1,222 @@
+sourcePath,method,contentHash,status
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java,checkActiveMqConnection(),7946e648372f220609925dc171d6211e,DONE
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java,checkHttpConnection(String urlStr,String serviceName),3d04d6f615f51853e1e48ef31001e3b9
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java,getSecurityStatus(),232043e433e8e27d48417ce838af4bb8,DONE
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/config/AsyncConfig.java,notificacionTadExecutor(),f87f137e09cf228e4d7b0e7035894ab0,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/config/RestTemplateConfig.java,restTemplate(),6c45dddfaa3db43b116a18ed43c8d5cb,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/events/listener/NotificacionEventListener.java,handleNotificacion(NotificacionEvent event),65cf009f53ea838ec29f94e90aa53977,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/AutenticacionException.java,AutenticacionException(String message),26d07e54e720c2004b16e17a46079296,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/ConexionException.java,ConexionException(String message,int statusCode),8e81fa6fc5a8c38c3f82906fbed5f09a
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/ConexionException.java,ConexionException(String message,int statusCode,Throwable cause)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/ConexionException.java,getStatusCode(),3b8e8990113f89737c38391eaaaf2994,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/DefaultExceptionHandler.java,handle(AutenticacionException e),cffee69f91b7368cd2ca1c8f34551486,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/DefaultExceptionHandler.java,handle(ConexionException e),229ae9130e1b7cdc6f427187ee780594,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/DefaultExceptionHandler.java,handle(MethodArgumentNotValidException e),303fc4c16f2487c7ed1366f1f5d768e7,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/DefaultExceptionHandler.java,handle(NegocioException e),ecc8a3eccea59783a1d04d8f4237a5cb,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/DefaultExceptionHandler.java,handle(NoEncontradoException e),4aad7f7fc4aa1b60c961a1fa6d6712be,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/DefaultExceptionHandler.java,handle(ValidacionesManualesException e),dcedddf56a870269f70d938ff4d374d3,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/DefaultExceptionHandler.java,sumarErrorInterno(ErrorResponse response,String className),fad4e1afcb33cc5b9bcabe74099a7345
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/DefaultExceptionHandler.java,sumarLinks(ErrorResponse response),104b671b23686114145997bfecaea023,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/NegocioException.java,NegocioException(String message),9f6af235e8d139b65c397393ef7c34f0,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/NoEncontradoException.java,NoEncontradoException(String message),5c2ff04749de994f660dd5657450b15c,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/ParseException.java,ParseException(String message),f428063a77899f03e348225f57bb1d68,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/ValidacionesManualesException.java,getMensajesDeError(),295cd1bc440bb35e87f3a3743148d38d,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/exceptions/ValidacionesManualesException.java,ValidacionesManualesException(List<String> mensajesDeError),97ae38cc0dede522c0704334e07d5f72,EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/DocumentoMapper.java,toResponse(DocumentoEntity entity),63f35126a937ee2aa4c36faa7f9512c7,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/HistorialSolicitudMapper.java,toResponse(HistorialSolicitudEntity entity),e34523066b4b5c2429491cf780fce2e9,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/ObservacionMapper.java,toResponse(ObservacionEntity entity),03ecb650e80ed5ead6653d1a19b9eb2b,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/OrigenMapper.java,toResponse(OrigenEntity entity),6dd187be3ef5c7a8bb9e3f6809d6abaa,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/PartidaMapper.java,toEntity(PartidaResponse partidaResponse),7bc85980e63672dab9e5c14cc158a120,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/PartidaMapper.java,toResponse(PartidaEntity entity),f2d0b931acf79ec20f5e2d055c2177c8,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/PersonaMapper.java,toDto(TitularEntity titular),05c34a92ef7f3c10b521e9a8713a8a8f,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/PersonaMapper.java,toPersonaDto(PersonaSolicitudRequest request),f06c4ac660805215e9debcb5a31b0c54,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/PersonaMapper.java,toResponse(PersonaEntity entity),fa50a130cdc17c6b03b86e609bbf00a4,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/PropertyConfigurationMapper.java,toDto(PropertyConfigurationEntity entity),1ba1d6908c4951c70c2f9ce383177e88,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/RolMapper.java,toResponse(RolEntity entity),1a43da987784351620c14ce79cdf7c5a,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/SolicitudMapper.java,configurarNotificaciones(SolicitudResponse response,SolicitudEntity entity,boolean esOrigenWeb
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/SolicitudMapper.java,configurarPantallaAndEstado(SolicitudResponse response,String estadoActual,boolean estaCerrada)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/SolicitudMapper.java,esOrigenWeb(SolicitudEntity entity),18cd0719ccfa0175ecca35cd42637aa2,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/SolicitudMapper.java,esSolicitudCerrada(String estadoActual),32dd056a9301f81a5b234500d7b7953e,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/SolicitudMapper.java,obtenerEstadoNotificacion(Boolean fueNotificado,boolean debeNotificar),7c3e1670e7111b629ffeb51185d759e6
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/SolicitudMapper.java,SolicitudMapper(ModelMapper modelMapper),900100a7438ec2888e929409208858f3,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/SolicitudMapper.java,toResponse(SolicitudEntity entity),3f21cc125c4d77a360d14e0f2ad07af6,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/TitularMapper.java,toResponse(TitularEntity entity),339fb1bb9b212b8b1adba5ffd035e447,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/TopograficoMapper.java,toDto(DatosTopograficosRequest topografico),b765d8df657afc4a82a8357fe11acc43,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/TopograficoMapper.java,toDto(TopograficoEntity topografico),279598bee3c18ba27ad4e87eec9a2622,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/TopograficoMapper.java,toEntity(DatoTopograficoDto topografico),40b1f200999846f9a33da6c299d6c1b7,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/mappers/TopograficoMapper.java,toResponse(TopograficoEntity entity),9c12f1d31f60a03f5203fd81a43aaabd,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/scheduled/impl/BusquedaAutomaticaScheduledImpl.java,batchBusquedaAutomatica(),c72a62fada8512cf01bdd4111b90ea02,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/scheduled/impl/BusquedaAutomaticaScheduledImpl.java,busquedaAutomatica(SolicitudEntity solicitud),07c8b0ba8810740977ceaab360e22bba,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/scheduled/impl/ReintentosNotificacionTadSheduledImpl.java,procesarReintentosNotificacionTad(),ea53bf5b68e7e458962e194029e07a03,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/AuthServiceImpl.java,getToken(),685329915deb4260af5042f994720b66,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/AuthServiceImpl.java,obtenerAccessToken(String serviceTicket),173d2fd51a2b08d8e45b2edb80255162,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/AuthServiceImpl.java,obtenerServiceTicketPrimeraRequest(),7d21054ed5d210e237a43a693c1722c6,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/AuthServiceImpl.java,obtenerServiceTicketSegundaRequest(String submitUrl),3f9407dad9a84e9b19f98ce8f0d5907e,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/AuthServiceImpl.java,obtenerSubmitUrl(String html),dd9731aab4c85e206fb77f680793ba95,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/AuthServiceImpl.java,renovarToken(),db5f891d4b7c2c97642e694b457ddc0f,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/CircunscripcionServiceImpl.java,filtrarCircunscripcionesPorMaterias(List<CircunscripcionMateriasResponse> circunscripciones,List<String> materias),9a4a87caacbde2f48fbaf7ed6f687fc6
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/CircunscripcionServiceImpl.java,getCircunscripciones(),5fced83c6e40c359d6503286976c7d04,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/CircunscripcionServiceImpl.java,getCircunscripcionesFromRce(),f008b02cbd78f202032d059f99951467,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/CircunscripcionServiceImpl.java,updateCircunscripciones(),7e9f800e7e6960cf76d7e8ac589d4d6f,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,buildPersona(PersonaDigitalizarRequest personaPartida,String materia),e88f638bf78911210f90c0f830127441
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,buildTopograficos(DigitalizarRequest request),3ccce4bf6915a9dc2a5f833b4ea9ddf5,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,busquedaAutomatica(DigitalizarRequest request),4ff7080c1ca79280a5a8a5cea4fd9e3b,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,digitalizar(DigitalizarRequest request),1e347615344bac6ae5b8f7a0dd163d75,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,getTipoRegistro(String materia),8f57395192515f424c4562e973f875a1,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,indexacionAmpliada(IndexacionAmpliadaRequest request),307aed2bd026a36b9fbf11cb64012b90,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,mapearDigitalizarRequest(DigitalizarRequest digitalizarRequest),660900e69f386b4c20c35df525604e41,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,mapearPersonaDto(PersonaDigitalizarRequest personaDto,IndexacionAmpliadaDto indexacionAmpliadaDto,String sufix
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,parseFecha(String fechaString),758cc298e047e53e4c378b511a84860e,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,procesarDigitalizacionFlowable(DigitalizarRequest request),12cc14d7b63f7303ba45f8c2912f2c1a,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,validarContrayente2(DigitalizarRequest request),663b1baf0d477dce0ec308c04fc7757e,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,validarNacido(DigitalizarRequest request),e94cc32c85ff95e325dceb9fc1781f2e,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitizeService.java,execute(DelegateExecution execution),d699bf50b60c5a0dc523f750d4b1f2a7,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DocumentoServiceImpl.java,generarNombreUnicoArchivo(String urlArchivo,String nombreBase,String extension)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DocumentoServiceImpl.java,guardarDocumento(String nombre,byte[] contenido,String tipo)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DocumentoServiceImpl.java,obtenerDocumentoRelacionado(Integer id),37e101c6714f684aa44f75e22a7e12cc,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DocumentoServiceImpl.java,validateFileSize(byte[] contenido),9ccaf3e058bf5f3a0e771c13ee91002b,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/EstadisticasServiceImpl.java,obtenerEstadisticas(String fechaDesde,String fechaHasta),4ec7d5488d1dacf69061dddd78f04c51
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/EstadisticasServiceImpl.java,obtenerFechasValidas(String fechaDesde,String fechaHasta),1da7971fc641529bacad577379770c7d
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/EstadisticasServiceImpl.java,obtenerReporte(String fechaDesde,String fechaHasta),c475c78765f769867d5245adc7f5b25a
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,assignUserTask(Integer solicitudId,String usuario),e32f578fdcfa5d57cc66c7f5e1aecba7
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,cerrar(Integer solicitudId),e067debc4d24a38ac058ff7c16892bd3,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,derivar(SolicitudEntity solicitud,String nombreEstadoDestino,String usuario)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,digitalizar(Integer solicitudId,String usuario),e7b31d0a45601638ede1afc2498b2bda
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,executeBusquedaAutomatica(Integer solicitudId,Boolean fueExitoso),cc08f7db2a22914e3f2678331f1176d1
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,executeBusquedaDigital(Integer solicitudId,String deriveTo,boolean digitalizar
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,executeControlActas(Integer solicitudId,String deriveTo,boolean cerrar
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,executeFichero(Integer solicitudId,String deriveTo,boolean digitalizar
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,getSolicitudByState(EstadosEnum estado),12f7071ac8871f3bc4a8add7cf6045e3,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,getSolicitudIdByState(EstadosEnum estado),6077630a68342051da512b7b670fff98,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,getTaskBySolicitudId(Integer solicitudId),49cc0b51f0f8e0cf72b246dbec41a70f,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,getTasksByState(EstadosEnum estado),ed07dc21cd3de2f79544753408280cb3,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,isProcessActiveBySolicitudId(Integer solicitudId),d6aa3bacf87faa01e45f54f7abd8eb03,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,obtenerSolicitud(int id),b36441aa1973a529cfb1bcac3253a18d,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,obtenerSolicitudesCerradas(),94307d35abbf56ad27e540e1f3301b98,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,obtenerSolicitudesFinalizadasConEstadoActual(),e8673ee12fae9906d2d3bd2ec0d9782b,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,obtenerSolicitudIdPorProceso(String processInstanceId),f11a565ac3e9282c0dee64512b20f30a,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,procesaBusquedaAutomatica(Integer solicitudId,boolean busquedaExistosa),21ec1c25cf1898bc17e2957da9ce834e
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,startProcess(SolicitudEntity solicitud),623a5cbd5de7dd8ea09c9f3be37caa9b,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,startReopingProcess(Integer solicitudId,String bandeja),5ad9f3a1f51a79801b3d0717b86b57ba
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,submitReview(String taskId,String processIntanceId,Map<String
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,validarEstado(String estado),1da1202c7e9c7abfe292e7c5bdd906b8,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GedoServiceImpl.java,generarDocumentoGedo(GenerarDocumentoRequest request),73f941578eb6858925f5145ad4a2e6a0,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GedoServiceImpl.java,mapearComponentesPorFormularioParaTransaccionResponse(FormularioComponentesResponse componentesEncontrados),ad05370b0efac6951819f2d68c7c7d50,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GedoServiceImpl.java,mapearReponseBody(String bodyResponse),4de73666e8122553b24e8804cfa987a6,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GedoServiceImpl.java,obtenerComponentesPorFormulario(String nombreFormulario),9de71aaa1fcbf7ed3c0bb8a220dfec87,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GedoServiceImpl.java,obtenerComponentesPorFormularioParaTransaccion(String nombreFormulario),87783efaf3ff92ff0b610c7cecdfe886,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GedoServiceImpl.java,obtenerIdTransaccion(FormularioDynformRequest formulario),3fff1864e3a4fd4b687bc9b9aadf4088,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GeneroServiceImpl.java,exists(String nombreGenero),334cca0af5d54aa223d8e708e099070c,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GeneroServiceImpl.java,getGeneros(),aed819e37299ff0737bfa011d6c77c8e,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GeneroServiceImpl.java,getGenerosFromRce(),e4e705129fa8b93a8a924ebf528913bd,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GeneroServiceImpl.java,updateGeneros(),882d8eea9e76d94e8a957c75281d364b,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HealthcheckServiceImpl.java,comprobarActiveMq(),b047a595c4126beff4679a7aff0a811e,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HealthcheckServiceImpl.java,comprobarRce(),b3f1a7fc4800dcc58a72d79f1e05f4fc,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HealthcheckServiceImpl.java,comprobarTad(),f3b2c86193d60041e68df18155d0d6be,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HealthcheckServiceImpl.java,obtenerVersion(),5cbec6c31e3152b8a965e3750e330495,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HealthcheckServiceImpl.java,shutdownExecutor(),3565d174679a907ff16ec194ef136854,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HistorialSolicitudServiceImpl.java,obtenerHistorialSolicitud(Integer id),357e37d39e85cacebea94389f4d9c080,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/MateriaServiceImpl.java,exists(String nombreMateria),ab45b134b40356afb650a439bd9829da,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/MateriaServiceImpl.java,getMateriasFromRce(),9678df73de6a2699d23e4d6dd22516ac,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/MateriaServiceImpl.java,getMateriasPartidas(),02ed6175881051d861b46cd5accfbe48,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/MateriaServiceImpl.java,updateMaterias(),b679cdb47552a6336b3c60db7dd4939d,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/MessageSpServiceImpl.java,procesarReintentos(),672465d78a909a1f24a19b39acb8bdd3,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificacionAsincronaServiceImpl.java,actualizarEstadoSolicitud(SolicitudEntity solicitud,Boolean exitoso),a4721e8551e7e582ddbd915bebf29780
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificacionAsincronaServiceImpl.java,actualizarEstadoSolicitudTopic(SolicitudEntity solicitud,boolean exitoso),02ce7f23ccdfafd7dc21016097ca5f09
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificacionAsincronaServiceImpl.java,marcarNotificacionFallida(Integer solicitudId),4b76c52d7ddb2a487b787dccbe2b53ff,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificacionAsincronaServiceImpl.java,marcarNotificacionTopicFallida(Integer solicitudId),0ad947315a76a3bad50d12fa0d3ac265,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificacionAsincronaServiceImpl.java,notificarTad(SolicitudEntity solicitud,List<String> documentosConcatenados),bd68be08b2316c6afb7940d6be11595c
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificacionAsincronaServiceImpl.java,notificarTadAsync(NotificacionInternal dto),f749c01b30340aa57a5ceb2b34df10c5,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificacionAsincronaServiceImpl.java,notificarTopicAsync(NotificacionInternal notificacionDto),d4ea0410d0e55172289d3aa08b840343,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificacionAsincronaServiceImpl.java,notificarToTopic(SolicitudEntity solicitud,List<String> listaGedos),0481815a64430671f5820996c1909331
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotificarTopicServiceImpl.java,notificarTopic(String nombreTopic,String contenido),961d6a126ea54539d30723bb94bdf395
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/NotifyAndCloseService.java,execute(DelegateExecution execution),72a66d1e699230a8cc40262ed925c7c6,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/ObservacionServiceImpl.java,guardarObservacion(String observacion),df7e39adfb1be774f194ec6c3da871b9,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/ObtenerDatosRceServiceImpl.java,init(),c52f532b265a48440fc0c44c8037f796,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/ObtenerDatosRceServiceImpl.java,obtenerDatos(),81350b3266fddcc39d05b7b8422c884b,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/OrigenServiceImpl.java,exists(String nombreOrigen),46a0b5d61b9339375ec99b6c3320cb81,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/OrigenServiceImpl.java,existsById(Integer idOrigen),16601ea08001ffc6ee8b7f28a658ba9c,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/OrigenServiceImpl.java,getAll(),e1cb1825fdfc31f7a4176b3a2ed56021,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/OrigenServiceImpl.java,getByName(String nombre),a790f7c0c56f4e0a7a76b55c936262df,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,buscarDatosPartida(PartidaRequest partida),6e403124f5c930a901f0b4826c18ee72,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,buscarPartida(PartidaRequest request,boolean fueBusquedaAutomatica,boolean guardarDatos)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,buscarPdfPartida(PartidaRequest request),c016b3c5631ac5dbaf966abfb57d7a93,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,construirRequestActasConsultarDatosActas(PartidaRequest request,String numeroTramite),f3ed8331d4f61f494b4b825b890c5e1a
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,construirRequestActasConsultarImagenesActas(PartidaRequest request,String numeroTramite),89de5996a68dca8067bc9abce26e4dc2
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,eliminarPartida(Integer id),9db78ae23b8805cf330cc92334dc4d69,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,guardarRegistroPartida(PartidaDto partida,SolicitudEntity solicitud,boolean fueBusquedaAutomatica
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,obtenerContenidoImagen(ImagenActasResponse imagenActas,PartidaDto partida),20d5b919965cbbe7a28b6f01d4c0e1d0
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,procesarPartida(PartidaDto partida,List<PartidaResponse> partidasResponseList,SolicitudEntity solicitud
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,procesarPdfPartida(PartidaDto partida,ImagenActasResponse imagenActas,PartidaPdfWrapperResponse partidaPdfWrapperResponse)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PartidaServiceImpl.java,verificacionPartidaRequest(PartidaRequest request,boolean urgente),17876f4a25602293c33928fbe4179914
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PersonaServiceImpl.java,guardarPersonas(SolicitudRequest solicitudRequest,SolicitudEntity solicitud),841e2942405442900977ed4e2792a6f2
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PropertyConfigurationServiceImpl.java,getProperty(String clave),ef499399a4769e8e6e22befca7848e10,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PropertyConfigurationServiceImpl.java,getValor(String clave),48cbe4f4b8a9a4c4d0f0615c065f5fc5,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/PropertyConfigurationServiceImpl.java,init(),00f2717f861692dece6e9290401f677d,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,crearExcepcionDesdeRespuesta(ResponseEntity<?> response),c9e2d95c0098ffbbe9b29804fc51599e,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,crearHttpEntity(Object payload,String token,boolean usarAutenticacionBearer)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,getRootCause(Throwable t),65b7360d1f9d51de196acf348ed30429,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,logConnectionPoolConfiguration(Object httpClient),96522d948a7b09a36ec62f51a265c4a6,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,logRestTemplateInfo(),32444e7b0fc18dbacb3b368cda392227,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,logTimeoutConfiguration(Object httpClient),77cb5a6e9bc10a6d90e6282db4cb71a3,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,manejarExcepcion(RestClientException e),900bf802bd23e04dd0dbdb9f3873e661,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,switch(httpStatus),29aafd07f1306505d4a922cc6fd0eedb,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java,exists(String clave),342ab1f8a2cf51bdd08e397d634a0315,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java,findByClave(String clave),d1c32183ec485ba9f658784a915f078d,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java,findById(String clave),9c02ca3f1c87d1eb47a914a20b9f27ef,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java,getRoles(),227a6e753b23d019e0b9a65df5dd08f5,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java,getRolesFromDb(),2b6e0a0ee9b3f1b539a66661f86f5ae7,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java,updateRoles(),9f128ac9cdf9ad6c732e83cbf07e760f,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,asignarUsuario(Integer id),6c451dede592f05e6fbc3414caa03090,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,buildAndSaveSolicitud(SolicitudRequest solicitudRequest),9d53f2902ced51922ac11ba38897aa70,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,buildSolicitante(SolicitudRequest solicitudRequest),f347fafbe7c7c7db92a3b39821f840c1,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,buildTitular(SolicitudRequest solicitudRequest),8f5bc68debc40663fa21f8b92c091b71,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,buildTopografico(SolicitudRequest solicitudRequest),cd70569ee75be755e6bf4a9b059eb1aa,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,cerrarAndGenerarGedo(Integer solicitudId,List<String> actas),009a59b7d1220b576b85aaeec5f82ce3
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,cerrarSolicitud(Integer id,List<String> actas),5ecd1f8b8183289875f3859541d7d85e
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,construirDetalleSolicitudResponse(SolicitudEntity solicitud),05818a96cc7e222684e4d2107b80a2b0,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,derivarSolicitud(DetalleSolicitudRequest request),3ce89bcfaf281f2b47f2bb90bcf125ec,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,desasignarUsuario(Long id),e9cab7b6f3f09eacbd57bbe544a99500,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,digitalizarSolicitud(DetalleSolicitudRequest request),a9808110460d0ca04ce208d597325198,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,existeSolicitudId(Integer id),85dbfe133a0fabf8a956d7cd27ae7519,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,findById(int id),cc99aa5f13422372f78e24961fda52f4,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,findByState(EstadosEnum estado),00ea940d2a840a2aa86e68e28454f781,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,guardarTitularTopograficos(DatosPartidaDto datos,SolicitudEntity solicitud),4a127774b9fa86cd5e203528344f5ae2
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,notificarTad(SolicitudEntity solicitud,List<String> documentosConcatenados,Boolean esReapertura)
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,obtenerComponentesFormulario(String nombreFormulario,String acronimo,List<String> actas
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,obtenerPrimeraSolicitudPorNumero(String numero),2b913651137ccc16e4e1347b4f3b897f,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,obtenerSolicitud(Integer id),f709a824d033d15544618afee6797261,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,obtenerSolicitudesFiltradas(FiltroSolicitudRequest request,Pageable pageable),843bb05aa9c34ddd08b3a2b97bfc7410
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,reabrirSolicitud(DetalleSolicitudRequest request),0899eb3fa525e4fb586c8ec63b0fbb38,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,resetearNotificaciones(SolicitudEntity solicitud),c901c527fde94e8709a28c91373e0dff,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,setearDatosDerivacion(DetalleSolicitudRequest request,SolicitudEntity solicitud),bcc63a20555c8b9ca707bd04c7042d20
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,validacionesComunes(SolicitudRequest solicitud),756eb33563dda855b94898f6f3de401c,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,validacionesNoWeb(SolicitudRequest solicitud),1cd4694462a31d9fdee14b512b8df7bb,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,validacionesWeb(SolicitudRequest solicitud),6264e73b478a82282cdd8e2c4885b16f,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,validarRequest(SolicitudRequest solicitud),13593217afa67bac887b4cf0a634e2e7,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,verificarRequest(FiltroSolicitudRequest request),3d4372e38d3c0eafd64a46f87042dbf8,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/StdServiceImpl.java,obtenerIdentificador(),5808804f1e599bc88639636278b13fa7,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/StdServiceImpl.java,obtenerToken(),366223ad7515b674569dda313bf60974,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,crearRegistroNotificacionTad(NotificacionTadRequest notificacionTadRequest),2182f2260a4c129b78c5af7e3a6b46fe,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,guardarDatosEnDb(NotificacionTadEntity notificacionTadEntity,boolean notificacionExistosa),1edfd9dab62647c38f58d420297bb846
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,notificarTad(NotificacionTadRequest notificacionTadRequest,boolean esReapertura),e2d98e92262b5d9d939c889e57ec9614
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,obtenerDocumentosConcatenados(List<String> listaDocumentosGedo,String acronimo),7c8accdc3f6eb7ccde59974c0caa53ec
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,obtenerExpiracion(Map<String,Object> claims),f6edd186c839b26e6220e1bc19c6124f
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,obtenerToken(),81c2a9e62506d771ad125385b1eda0fe,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,renovarToken(),7a0fc858475b1d0fed66d112fb09cc25,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,resetearReintentos(SolicitudEntity solicitud),fa813e979386bcbd76e287424d395c18,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java,exists(String tipoDocumentoNombre),e0786193f1c5ed6f6a84ada3cd2d1aca,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java,getAll(),3186b91d29be6895361aa98b405f1867,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java,getTiposDocumentoFromRce(),b76da724d571a865552482bd38977ff2,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java,updateTiposDocumentos(),f6846da71ee3cccbd6c354a5780c53cf,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoWebServiceImpl.java,exists(String nombreTipoDocumento),9c33e53b131ecb980fec517377f17a5d,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoWebServiceImpl.java,existsTipoDocumentoPorOrigen(String tipoDocumento,String origen),ff4a714ee40cc28fec9400d84d1cd8c0
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoWebServiceImpl.java,getAll(),f06c11ba75cb1967c2081ebfce09dc1d,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TitularServiceImpl.java,findTitularOrNewEntity(PersonaDto persona),decaa1356cac76bff251d5c26699da5b,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TopograficoServiceImpl.java,findTopograficoOrNewEntity(DatoTopograficoDto topografico),d997e6bac7401f2ebbf378fa4aa42ea3,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TopograficoServiceImpl.java,topograficoVacio(DatosTopograficosRequest topografico),60ca9d5d257ecbb8bc24b8ee39c8fbcb,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TopograficoServiceImpl.java,validarDatosTopograficos(SolicitudRequest solicitud),30bf3d39f57301c0c9bc84152722152a,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TopograficoServiceImpl.java,validarFormatoTopograficos(DatosTopograficosRequest topografico),b88c71a2bcc9c1d71416da9e3217a51d,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/UsuarioServiceImpl.java,obtenerUsuario(String username),831c0be46031da38e922b39a262b9186,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/UsuarioServiceImpl.java,obtenerUsuarioPorReparticion(String reparticion),58e9aff98c707d9c510dd0974cb46b53,PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/UsuarioServiceImpl.java,obtenerUsuariosPorBandeja(@NotNull EstadosEnum bandeja),45622b204943b53c736a6695e6f3a269,PENDING

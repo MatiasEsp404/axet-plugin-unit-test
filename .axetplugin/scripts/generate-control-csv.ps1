@@ -66,6 +66,13 @@ function To-PosixPath([string]$path) {
     return ($path -replace "\\", "/")
 }
 
+function Get-RelativePathCustom([string]$from, [string]$to) {
+    $fromUri = New-Object System.Uri($from + "\")
+    $toUri = New-Object System.Uri($to)
+    $relativeUri = $fromUri.MakeRelativeUri($toUri)
+    return [System.Uri]::UnescapeDataString($relativeUri.ToString())
+}
+
 function Read-ExistingControl([string]$CsvFile) {
     $dict = @{}
     if (-not (Test-Path -LiteralPath $CsvFile)) { return $dict }
@@ -100,7 +107,7 @@ $existingData = Read-ExistingControl -CsvFile $CsvPath
 $newList = @()
 
 foreach ($file in $javaFiles) {
-    $relPath = To-PosixPath ([System.IO.Path]::GetRelativePath($cwd, $file.FullName))
+    $relPath = To-PosixPath (Get-RelativePathCustom -from $cwd -to $file.FullName)
     
     try {
         $methodsFound = Get-MethodHashes -filePath $file.FullName
@@ -131,7 +138,7 @@ foreach ($file in $javaFiles) {
             }
         }
     } catch {
-        Write-Warning "Error procesando $relPath: $($_.Exception.Message)"
+        Write-Warning "Error procesando ${relPath}: $($_.Exception.Message)"
     }
 }
 
