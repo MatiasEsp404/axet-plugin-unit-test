@@ -1,10 +1,23 @@
 <#
 .SYNOPSIS
   Genera/actualiza control.csv con granularidad de MÉTODO y soporte para sobrecarga.
+  
+.DESCRIPTION
+  Escanea archivos Java en un directorio, extrae métodos con sus firmas y genera/actualiza
+  un archivo CSV de control con hash MD5 del cuerpo de cada método.
+  
+.PARAMETER Root
+  Ruta del directorio raíz a escanear (relativa o absoluta)
+  
+.PARAMETER CsvPath
+  Ruta donde se guardará el archivo control.csv
 #>
 
 param(
+    [Parameter(Mandatory=$false)]
     [string]$Root = "sp-business\src\main\java",
+    
+    [Parameter(Mandatory=$false)]
     [string]$CsvPath = ".axetplugin/control.csv"
 )
 
@@ -12,81 +25,183 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 # -------------------------------------------------
-# Funciones de Procesamiento de Código
+# Funciones de Utilidad
 # -------------------------------------------------
 
-function Get-MethodHashes([string]$filePath) {
-    $content = [System.IO.File]::ReadAllText($filePath)
+function Write-ColoredMessage {
+    param(
+        [string]$Message,
+        [string]$Type = "Info"
+    )
+    
+    switch ($Type) {
+        "Info"    { Write-Host $Message -ForegroundColor Cyan }
+        "Success" { Write-Host $Message -ForegroundColor Green }
+        "Warning" { Write-Host $Message -ForegroundColor Yellow }
+        "Error"   { Write-Host $Message -ForegroundColor Red }
+        "Gray"    { Write-Host $Message -ForegroundColor Gray }
+        default   { Write-Host $Message }
+    }
+}
+
+function Escape-CsvField {
+    param([string]$field)
+    
+    if ($field -match '[,"\r\n]') {
+        return '"' + ($field -replace '"', '""') + '"'
+    }
+    return $field
+}
+
+function To-PosixPath {
+    param([string]$path)
+    return ($path -replace "\\", "/")
+}
+
+function Get-RelativePathSafe {
+    param(
+        [string]$from,
+        [string]$to
+    )
+    
+    try {
+        # Normalizar rutas
+        $fromFull = [System.IO.Path]::GetFullPath($from)
+        $toFull = [System.IO.Path]::GetFullPath($to)
+        
+        # Usar Uri para calcular ruta relativa
+        $fromUri = New-Object System.Uri($fromFull.TrimEnd('\', '/') + "\")
+        $toUri = New-Object System.Uri($toFull)
+        $relativeUri = $fromUri.MakeRelativeUri($toUri)
+        
+        return [System.Uri]::UnescapeDataString($relativeUri.ToString())
+    }
+    catch {
+        Write-ColoredMessage "Error calculando ruta relativa: $_" "Warning"
+        return $to
+    }
+}
+
+# -------------------------------------------------
+# Función para extraer métodos y calcular hashes
+# -------------------------------------------------
+
+function Get-MethodHashes {
+    param([string]$filePath)
+    
     $methods = @()
     
-    # Regex mejorado para capturar Nombre (Grupo 1) y Parámetros (Grupo 2)
-    # Soporta genéricos <T>, arrays [] y múltiples modificadores
-    $methodRegex = [regex]'(?:public|protected|private|static|\s) +[\w\<\>\[\]]+\s+(\w+)\s*\(([^\)]*)\)\s*\{'
-    $matches = $methodRegex.Matches($content)
-
-    foreach ($match in $matches) {
-        $methodName = $match.Groups[1].Value
-        $parameters = $match.Groups[2].Value.Trim() -replace '\s+', ' ' # Limpia espacios extra
+    try {
+        $content = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
         
-        # Firma única: nombre + parámetros entre paréntesis
-        $fullSignature = "$methodName($parameters)"
+        # Regex mejorado para capturar métodos (excluye constructores y clases internas)
+        # Captura: modificadores, tipo retorno, nombre método, parámetros
+        $methodPattern = '(?m)^\s*(?:public|protected|private|static|\s)+[\w\<\>\[\],\s]+\s+(\w+)\s*\(([^)]*)\)\s*(?:throws\s+[\w\s,]+)?\s*\{'
         
-        $startIndex = $match.Index
-        $braceStart = $content.IndexOf('{', $startIndex)
+        $regex = [regex]::new($methodPattern)
+        $matches = $regex.Matches($content)
         
-        # Algoritmo de conteo de llaves para capturar el cuerpo exacto
-        $braceCount = 1
-        $currentPos = $braceStart + 1
-        while ($braceCount -gt 0 -and $currentPos -lt $content.Length) {
-            if ($content[$currentPos] -eq '{') { $braceCount++ }
-            elseif ($content[$currentPos] -eq '}') { $braceCount-- }
-            $currentPos++
-        }
-        
-        $methodBody = $content.Substring($startIndex, $currentPos - $startIndex)
-        
-        # Hash MD5 del contenido del método
-        $md5 = [System.Security.Cryptography.MD5]::Create()
-        $hashBytes = $md5.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($methodBody))
-        $hashString = [System.BitConverter]::ToString($hashBytes).Replace("-", "").ToLower()
-        
-        $methods += [PSCustomObject]@{
-            Signature = $fullSignature
-            Hash      = $hashString
+        foreach ($match in $matches) {
+            $methodName = $match.Groups[1].Value
+            $parametersRaw = $match.Groups[2].Value.Trim()
+            
+            # Normalizar parámetros: eliminar nombres de variables, dejar solo tipos
+            $parameters = $parametersRaw -replace '\s+', ' ' -replace '\s*,\s*', ','
+            
+            # Si los parámetros tienen nombres de variables, intentar extraer solo tipos
+            if ($parameters -match '\w+\s+\w+') {
+                # Patrón para extraer tipos: TipoGenerico<T> nombreVar, Tipo nombreVar
+                $paramTypes = @()
+                $paramParts = $parameters -split ','
+                foreach ($part in $paramParts) {
+                    $part = $part.Trim()
+                    if ($part) {
+                        # Extraer tipo (todo menos la última palabra que es el nombre de variable)
+                        if ($part -match '^(.+?)\s+\w+$') {
+                            $paramTypes += $matches.Groups[1].Value.Trim()
+                        }
+                        else {
+                            $paramTypes += $part
+                        }
+                    }
+                }
+                $parameters = $paramTypes -join ','
+            }
+            
+            # Firma única del método
+            $signature = "$methodName($parameters)"
+            
+            # Extraer cuerpo del método usando conteo de llaves
+            $startIndex = $match.Index
+            $braceStart = $content.IndexOf('{', $startIndex)
+            
+            if ($braceStart -eq -1) { continue }
+            
+            $braceCount = 1
+            $currentPos = $braceStart + 1
+            
+            while ($braceCount -gt 0 -and $currentPos -lt $content.Length) {
+                $char = $content[$currentPos]
+                if ($char -eq '{') { $braceCount++ }
+                elseif ($char -eq '}') { $braceCount-- }
+                $currentPos++
+            }
+            
+            if ($braceCount -ne 0) {
+                Write-ColoredMessage "  [WARN] Llaves desbalanceadas en método: $signature" "Warning"
+                continue
+            }
+            
+            $methodBody = $content.Substring($startIndex, $currentPos - $startIndex)
+            
+            # Calcular hash MD5
+            $md5 = [System.Security.Cryptography.MD5]::Create()
+            $hashBytes = $md5.ComputeHash([System.Text.Encoding]::UTF8.GetBytes($methodBody))
+            $hashString = [System.BitConverter]::ToString($hashBytes).Replace("-", "").ToLower()
+            
+            $methods += [PSCustomObject]@{
+                Signature = $signature
+                Hash      = $hashString
+            }
         }
     }
+    catch {
+        Write-ColoredMessage "Error extrayendo métodos: $_" "Error"
+    }
+    
     return $methods
 }
 
 # -------------------------------------------------
-# Funciones de Utilidad (Basadas en el original)
+# Función para leer CSV existente
 # -------------------------------------------------
 
-function To-PosixPath([string]$path) {
-    return ($path -replace "\\", "/")
-}
-
-function Get-RelativePathCustom([string]$from, [string]$to) {
-    $fromUri = New-Object System.Uri($from + "\")
-    $toUri = New-Object System.Uri($to)
-    $relativeUri = $fromUri.MakeRelativeUri($toUri)
-    return [System.Uri]::UnescapeDataString($relativeUri.ToString())
-}
-
-function Read-ExistingControl([string]$CsvFile) {
-    $dict = @{}
-    if (-not (Test-Path -LiteralPath $CsvFile)) { return $dict }
+function Read-ExistingControl {
+    param([string]$csvFile)
     
-    # Import-Csv facilita la lectura del estado previo
-    $rows = Import-Csv -LiteralPath $CsvFile
-    foreach ($r in $rows) {
-        # La llave es Ruta + Firma del Método para evitar duplicados por sobrecarga
-        $key = "$($r.sourcePath)|$($r.method)"
-        $dict[$key] = @{ 
-            status = $r.status; 
-            hash = $r.contentHash 
-        }
+    $dict = @{}
+    
+    if (-not (Test-Path -LiteralPath $csvFile)) {
+        return $dict
     }
+    
+    try {
+        $rows = Import-Csv -LiteralPath $csvFile -Encoding UTF8
+        
+        foreach ($row in $rows) {
+            $key = "$($row.sourcePath)|$($row.method)"
+            $dict[$key] = @{
+                status = $row.status
+                hash   = $row.contentHash
+            }
+        }
+        
+        Write-ColoredMessage "CSV existente cargado: $($dict.Count) registros" "Gray"
+    }
+    catch {
+        Write-ColoredMessage "Error leyendo CSV existente: $_" "Warning"
+    }
+    
     return $dict
 }
 
@@ -94,68 +209,132 @@ function Read-ExistingControl([string]$CsvFile) {
 # Flujo Principal
 # -------------------------------------------------
 
-Write-Host "Escaneando métodos en: $Root" -ForegroundColor Cyan
-
-$cwd = (Get-Location).ProviderPath
-# Validación de existencia del directorio
-if (-not (Test-Path -LiteralPath $Root)) { throw "Ruta no encontrada: $Root" }
-$rootFull = (Resolve-Path -LiteralPath $Root).ProviderPath
-
-$javaFiles = Get-ChildItem -LiteralPath $rootFull -Recurse -File -Filter "*.java"
-$existingData = Read-ExistingControl -CsvFile $CsvPath
-
-$newList = @()
-
-foreach ($file in $javaFiles) {
-    $relPath = To-PosixPath (Get-RelativePathCustom -from $cwd -to $file.FullName)
+try {
+    Write-ColoredMessage "`n=== GENERADOR DE CONTROL CSV ===" "Info"
+    Write-ColoredMessage "Escaneando: $Root`n" "Info"
     
-    try {
-        $methodsFound = Get-MethodHashes -filePath $file.FullName
+    # Obtener directorio actual
+    $cwd = (Get-Location).ProviderPath
+    
+    # Validar que existe el directorio raíz
+    if (-not (Test-Path -LiteralPath $Root)) {
+        throw "ERROR: Ruta no encontrada: $Root"
+    }
+    
+    $rootFull = (Resolve-Path -LiteralPath $Root).ProviderPath
+    Write-ColoredMessage "Ruta completa: $rootFull" "Gray"
+    
+    # Buscar todos los archivos .java
+    $javaFiles = Get-ChildItem -LiteralPath $rootFull -Recurse -File -Filter "*.java" -ErrorAction Stop
+    Write-ColoredMessage "Archivos Java encontrados: $($javaFiles.Count)`n" "Info"
+    
+    if ($javaFiles.Count -eq 0) {
+        throw "No se encontraron archivos .java en: $Root"
+    }
+    
+    # Leer CSV existente
+    $existingData = Read-ExistingControl -csvFile $CsvPath
+    
+    # Lista para almacenar nuevos registros
+    $newList = @()
+    $filesProcessed = 0
+    $methodsFound = 0
+    $methodsNew = 0
+    $methodsModified = 0
+    $methodsPreexisting = 0
+    
+    # Procesar cada archivo Java
+    foreach ($file in $javaFiles) {
+        $filesProcessed++
+        $relPath = To-PosixPath (Get-RelativePathSafe -from $cwd -to $file.FullName)
         
-        foreach ($m in $methodsFound) {
-            $key = "$relPath|$($m.Signature)"
-            $status = "PENDING"
+        Write-ColoredMessage "[$filesProcessed/$($javaFiles.Count)] Procesando: $(Split-Path $relPath -Leaf)" "Gray"
+        
+        try {
+            $methods = Get-MethodHashes -filePath $file.FullName
             
-            if ($existingData.ContainsKey($key)) {
-                $old = $existingData[$key]
-                # Si el hash es igual, mantenemos el estado o pasamos a PREEXISTING
-                if ($old.hash -eq $m.Hash) {
-                    $status = $old.status
-                    if ($status -eq "DONE") { $status = "PREEXISTING" }
-                } else {
-                    # Si el hash cambió, forzamos PENDING para que la IA lo actualice
-                    Write-Host "  [Modificado] $($m.Signature) en $relPath" -ForegroundColor Yellow
+            foreach ($method in $methods) {
+                $methodsFound++
+                $key = "$relPath|$($method.Signature)"
+                $status = "PENDING"
+                
+                if ($existingData.ContainsKey($key)) {
+                    $old = $existingData[$key]
+                    
+                    if ($old.hash -eq $method.Hash) {
+                        # Hash igual: mantener estado
+                        $status = $old.status
+                        if ($status -eq "DONE") {
+                            $status = "PREEXISTING"
+                            $methodsPreexisting++
+                        }
+                    }
+                    else {
+                        # Hash diferente: marcar como modificado
+                        $status = "PENDING"
+                        $methodsModified++
+                        Write-ColoredMessage "  [Modificado] $($method.Signature)" "Warning"
+                    }
                 }
-            } else {
-                Write-Host "  [Nuevo]      $($m.Signature)" -ForegroundColor Gray
-            }
-
-            $newList += [PSCustomObject]@{
-                sourcePath  = $relPath
-                method      = $m.Signature
-                contentHash = $m.Hash
-                status      = $status
+                else {
+                    # Método nuevo
+                    $methodsNew++
+                }
+                
+                $newList += [PSCustomObject]@{
+                    sourcePath  = $relPath
+                    method      = $method.Signature
+                    contentHash = $method.Hash
+                    status      = $status
+                }
             }
         }
-    } catch {
-        Write-Warning "Error procesando ${relPath}: $($_.Exception.Message)"
+        catch {
+            Write-ColoredMessage "  ERROR procesando archivo: $_" "Error"
+        }
     }
+    
+    # Crear directorio para CSV si no existe
+    $fullCsvPath = if ([System.IO.Path]::IsPathRooted($CsvPath)) { 
+        $CsvPath 
+    } else { 
+        Join-Path $cwd $CsvPath 
+    }
+    
+    $csvDir = Split-Path -Parent $fullCsvPath
+    if ($csvDir -and -not (Test-Path $csvDir)) {
+        New-Item -ItemType Directory -Path $csvDir -Force | Out-Null
+        Write-ColoredMessage "`nDirectorio creado: $csvDir" "Success"
+    }
+    
+    # Generar líneas CSV con escape apropiado
+    $lines = @("sourcePath,method,contentHash,status")
+    
+    foreach ($item in ($newList | Sort-Object sourcePath, method)) {
+        $line = "{0},{1},{2},{3}" -f `
+            (Escape-CsvField $item.sourcePath),
+            (Escape-CsvField $item.method),
+            (Escape-CsvField $item.contentHash),
+            (Escape-CsvField $item.status)
+        $lines += $line
+    }
+    
+    # Escribir archivo CSV (UTF-8 sin BOM)
+    $utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllLines($fullCsvPath, $lines, $utf8NoBom)
+    
+    # Resumen
+    Write-ColoredMessage "`n=== RESUMEN ===" "Info"
+    Write-ColoredMessage "Archivos procesados: $filesProcessed" "Success"
+    Write-ColoredMessage "Métodos encontrados: $methodsFound" "Success"
+    Write-ColoredMessage "Métodos nuevos: $methodsNew" "Success"
+    Write-ColoredMessage "Métodos modificados: $methodsModified" "Warning"
+    Write-ColoredMessage "Métodos preexistentes: $methodsPreexisting" "Gray"
+    Write-ColoredMessage "`nCSV generado: $fullCsvPath" "Success"
+    Write-ColoredMessage "Total registros: $($newList.Count)" "Success"
 }
-
-# -------------------------------------------------
-# Escritura manual UTF-8 sin BOM (Requisito original)
-# -------------------------------------------------
-
-$fullCsv = if ([System.IO.Path]::IsPathRooted($CsvPath)) { $CsvPath } else { Join-Path $cwd $CsvPath }
-$csvParent = Split-Path -Parent $fullCsv
-if ($csvParent -and -not (Test-Path $csvParent)) { New-Item -ItemType Directory -Path $csvParent | Out-Null }
-
-$lines = @("sourcePath,method,contentHash,status")
-foreach ($item in ($newList | Sort-Object sourcePath, method)) {
-    $lines += "$($item.sourcePath),$($item.method),$($item.contentHash),$($item.status)"
+catch {
+    Write-ColoredMessage "`nERROR CRÍTICO: $_" "Error"
+    Write-ColoredMessage $_.ScriptStackTrace "Error"
+    exit 1
 }
-
-$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-[System.IO.File]::WriteAllLines($fullCsv, $lines, $utf8NoBom)
-
-Write-Host "`nActualización completada. Total métodos rastreados: $($newList.Count)" -ForegroundColor Green
