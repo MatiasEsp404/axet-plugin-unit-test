@@ -4,7 +4,7 @@
 #>
 
 param(
-    [string]$Root = "ms-bandejas-gedo-develop/src/main/java",
+    [string]$Root = "sp-business\src\main\java",
     [string]$CsvPath = ".axetplugin/control.csv"
 )
 
