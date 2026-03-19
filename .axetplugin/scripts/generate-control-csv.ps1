@@ -47,7 +47,8 @@ function Write-ColoredMessage {
 function Escape-CsvField {
     param([string]$field)
     
-    if ($field -match '[,"\r\n]') {
+    # Escapar punto y coma, comillas y saltos de línea
+    if ($field -match '[;"\r\n]') {
         return '"' + ($field -replace '"', '""') + '"'
     }
     return $field
@@ -94,15 +95,22 @@ function Get-MethodHashes {
     try {
         $content = [System.IO.File]::ReadAllText($filePath, [System.Text.Encoding]::UTF8)
         
-        # Regex mejorado para capturar métodos (excluye constructores y clases internas)
+        # Regex mejorado para capturar métodos (excluye palabras clave de Java)
         # Captura: modificadores, tipo retorno, nombre método, parámetros
-        $methodPattern = '(?m)^\s*(?:public|protected|private|static|\s)+[\w\<\>\[\],\s]+\s+(\w+)\s*\(([^)]*)\)\s*(?:throws\s+[\w\s,]+)?\s*\{'
+        $methodPattern = '(?m)^\s*(?:public|protected|private|static|final|synchronized|native|abstract|\s)+[\w\<\>\[\],\s]+\s+(\w+)\s*\(([^)]*)\)\s*(?:throws\s+[\w\s,]+)?\s*\{'
         
         $regex = [regex]::new($methodPattern)
         $matches = $regex.Matches($content)
         
         foreach ($match in $matches) {
             $methodName = $match.Groups[1].Value
+            
+            # Excluir palabras clave de Java (if, for, while, switch, catch, etc.)
+            $javaKeywords = @('if', 'for', 'while', 'switch', 'catch', 'try', 'do', 'else', 'synchronized')
+            if ($javaKeywords -contains $methodName.ToLower()) {
+                continue
+            }
+            
             $parametersRaw = $match.Groups[2].Value.Trim()
             
             # Normalizar parámetros: eliminar nombres de variables, dejar solo tipos
@@ -118,7 +126,7 @@ function Get-MethodHashes {
                     if ($part) {
                         # Extraer tipo (todo menos la última palabra que es el nombre de variable)
                         if ($part -match '^(.+?)\s+\w+$') {
-                            $paramTypes += $matches.Groups[1].Value.Trim()
+                            $paramTypes += $Matches[1].Trim()
                         }
                         else {
                             $paramTypes += $part
@@ -186,7 +194,7 @@ function Read-ExistingControl {
     }
     
     try {
-        $rows = Import-Csv -LiteralPath $csvFile -Encoding UTF8
+        $rows = Import-Csv -LiteralPath $csvFile -Delimiter ';' -Encoding UTF8
         
         foreach ($row in $rows) {
             $key = "$($row.sourcePath)|$($row.method)"
@@ -307,11 +315,11 @@ try {
         Write-ColoredMessage "`nDirectorio creado: $csvDir" "Success"
     }
     
-    # Generar líneas CSV con escape apropiado
-    $lines = @("sourcePath,method,contentHash,status")
+    # Generar líneas CSV con escape apropiado usando punto y coma como separador
+    $lines = @("sourcePath;method;contentHash;status")
     
     foreach ($item in ($newList | Sort-Object sourcePath, method)) {
-        $line = "{0},{1},{2},{3}" -f `
+        $line = "{0};{1};{2};{3}" -f `
             (Escape-CsvField $item.sourcePath),
             (Escape-CsvField $item.method),
             (Escape-CsvField $item.contentHash),

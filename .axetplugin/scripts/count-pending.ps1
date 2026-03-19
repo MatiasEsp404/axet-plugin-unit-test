@@ -13,7 +13,7 @@ try {
         exit 1
     }
     
-    $csv = Import-Csv -LiteralPath $CsvPath -Encoding UTF8
+    $csv = Import-Csv -LiteralPath $CsvPath -Delimiter ';' -Encoding UTF8
     
     if ($csv.Count -eq 0) {
         Write-Host ""

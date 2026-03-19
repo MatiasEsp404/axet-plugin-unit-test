@@ -119,7 +119,7 @@ try {
     }
     
     # Leer CSV
-    $csv = Import-Csv -LiteralPath $CsvPath -Encoding UTF8
+    $csv = Import-Csv -LiteralPath $CsvPath -Delimiter ';' -Encoding UTF8
     
     if ($csv.Count -eq 0) {
         Write-ColoredMessage "`nADVERTENCIA: El archivo CSV está vacío" "Warning"
@@ -181,23 +181,23 @@ try {
     if (-not $DryRun -and $excluded -gt 0) {
         Write-ColoredMessage "`nGuardando cambios..." "Info"
         
-        # Generar líneas CSV
-        $lines = @("sourcePath,method,contentHash,status")
+        # Generar líneas CSV usando punto y coma como separador
+        $lines = @("sourcePath;method;contentHash;status")
         
         foreach ($row in $csv) {
-            # Escapar campos que contengan comas o comillas
+            # Escapar campos que contengan punto y coma o comillas
             $sourcePath = $row.sourcePath
             $method = $row.method
             $contentHash = $row.contentHash
             $status = $row.status
             
             # Escape simple
-            if ($sourcePath -match '[,"]') { $sourcePath = '"' + ($sourcePath -replace '"', '""') + '"' }
-            if ($method -match '[,"]') { $method = '"' + ($method -replace '"', '""') + '"' }
-            if ($contentHash -match '[,"]') { $contentHash = '"' + ($contentHash -replace '"', '""') + '"' }
-            if ($status -match '[,"]') { $status = '"' + ($status -replace '"', '""') + '"' }
+            if ($sourcePath -match '[;"]') { $sourcePath = '"' + ($sourcePath -replace '"', '""') + '"' }
+            if ($method -match '[;"]') { $method = '"' + ($method -replace '"', '""') + '"' }
+            if ($contentHash -match '[;"]') { $contentHash = '"' + ($contentHash -replace '"', '""') + '"' }
+            if ($status -match '[;"]') { $status = '"' + ($status -replace '"', '""') + '"' }
             
-            $lines += "$sourcePath,$method,$contentHash,$status"
+            $lines += "$sourcePath;$method;$contentHash;$status"
         }
         
         # Escribir archivo (UTF-8 sin BOM)

@@ -1,4 +1,4 @@
-$rows = Import-Csv ".axetplugin/control.csv"
+$rows = Import-Csv ".axetplugin/control.csv" -Delimiter ';'
 $empty = $rows | Where-Object { [string]::IsNullOrWhiteSpace($_.status) }
 
 Write-Host "Total metodos sin estado: $($empty.Count)" -ForegroundColor Yellow
