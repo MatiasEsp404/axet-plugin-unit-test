@@ -217,15 +217,15 @@ sourcePath;method;contentHash;status
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java;verificarRequest(FiltroSolicitudRequest);bbac720dc92ccd7bb4eda0aa9d096a0a;EXCLUDED
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/StdServiceImpl.java;obtenerIdentificador();acc250fca828050d07f45f7eae602d56;PREEXISTING
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/StdServiceImpl.java;obtenerToken();1385f50a63ed59e00797c7bb22fcdb84;PREEXISTING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;crearRegistroNotificacionTad(NotificacionTadRequest);ceeda8922d2e644bc459e23c42106795;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;decodificarToken(String);504d1c9d1c97f31cc2fc8503338d46d5;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;guardarDatosEnDb(NotificacionTadEntity,boolean);5b89e7c5bcade3f4bedb24f0963951e3;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;notificarTad(NotificacionTadRequest,boolean);52179cb8e4759c15335fdb0bf5664f2b;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;obtenerDocumentosConcatenados(List<String>,String);5b0c47134d63103acd25ee0aeee0bb7a;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;obtenerExpiracion(Map<String,Object> claims);8008e570414f4c24fc1b875d71c30566;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;obtenerToken();b6b67aa6029497f81a0ba7252d27a57a;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;renovarToken();ea304a182f2d358c908d6fe74bb97310;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;resetearReintentos(SolicitudEntity);194cfc9fdcea0444694931be2e6c6d07;PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;crearRegistroNotificacionTad(NotificacionTadRequest);ceeda8922d2e644bc459e23c42106795;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;decodificarToken(String);504d1c9d1c97f31cc2fc8503338d46d5;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;guardarDatosEnDb(NotificacionTadEntity,boolean);5b89e7c5bcade3f4bedb24f0963951e3;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;notificarTad(NotificacionTadRequest,boolean);52179cb8e4759c15335fdb0bf5664f2b;DONE
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;obtenerDocumentosConcatenados(List<String>,String);5b0c47134d63103acd25ee0aeee0bb7a;DONE
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;obtenerExpiracion(Map<String,Object> claims);8008e570414f4c24fc1b875d71c30566;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;obtenerToken();b6b67aa6029497f81a0ba7252d27a57a;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;renovarToken();ea304a182f2d358c908d6fe74bb97310;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java;resetearReintentos(SolicitudEntity);194cfc9fdcea0444694931be2e6c6d07;DONE
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java;exists(String);00c6d0731dadadb74e008faa35b6ffbb;PREEXISTING
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java;getAll();44f5511a0ff2159b4b0459ce39de3347;PREEXISTING
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java;getTiposDocumentoFromRce();257a18cd4f4ae4aea11c50fd3343fffc;EXCLUDED
