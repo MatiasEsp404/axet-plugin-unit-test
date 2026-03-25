@@ -168,19 +168,19 @@ sourcePath;method;contentHash;status
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RepositorioDocumentoServiceImpl.java;obtenerArchivoWebDav(String);36abaebc0093d0246bfb7e4d2cd22935;DONE
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RepositorioDocumentoServiceImpl.java;obtenerArchivoWebDavComoFile(String);2a6335fbf85814ff7a9695095681b541;DONE
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RepositorioDocumentoServiceImpl.java;subirArchivoWebDav(String,String,byte[]);b67cc67b083552144e8ee3cb1c4cffc3;DONE
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;crearExcepcionDesdeRespuesta(ResponseEntity<?> response);b9b60e3abc28d3971573bcb2aa7f9887;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;crearHttpEntity(Object,String,boolean);5cbcb856f8e42c06967c2cb53f9cc373;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;extraerConnectionManager(Object);07937c3d317aa34bd8c22862687aad97;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;extraerHttpClient(HttpComponentsClientHttpRequestFactory);e83d1602e352998e330df8067848f2c0;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;extraerRequestConfig(Object);bc0c6299bc9cb30c795dae782026503d;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;getRootCause(Throwable);cbad0009e64f56eb8a92b953ff30a2ca;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;logConnectionPoolConfiguration(Object);135159fbec67770fe5b85e4b6cc8ccee;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;logRestTemplateInfo();6218b8e3e74d261cbf62e266cf4e3a4a;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;logTimeoutConfiguration(Object);82dd30c13334920e23e2839ec97dc064;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;manejarExcepcion(RestClientException);060d1988d41aca95d65f45b449fe2da6;PENDING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;procesarRespuesta(ResponseEntity<T> response);752be0a3eab1948634e9536c5e2a3753;PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;crearExcepcionDesdeRespuesta(ResponseEntity<?> response);b9b60e3abc28d3971573bcb2aa7f9887;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;crearHttpEntity(Object,String,boolean);5cbcb856f8e42c06967c2cb53f9cc373;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;extraerConnectionManager(Object);07937c3d317aa34bd8c22862687aad97;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;extraerHttpClient(HttpComponentsClientHttpRequestFactory);e83d1602e352998e330df8067848f2c0;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;extraerRequestConfig(Object);bc0c6299bc9cb30c795dae782026503d;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;getRootCause(Throwable);cbad0009e64f56eb8a92b953ff30a2ca;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;logConnectionPoolConfiguration(Object);135159fbec67770fe5b85e4b6cc8ccee;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;logRestTemplateInfo();6218b8e3e74d261cbf62e266cf4e3a4a;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;logTimeoutConfiguration(Object);82dd30c13334920e23e2839ec97dc064;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;manejarExcepcion(RestClientException);060d1988d41aca95d65f45b449fe2da6;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;procesarRespuesta(ResponseEntity<T> response);752be0a3eab1948634e9536c5e2a3753;EXCLUDED
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;realizarConsultaRest(RestRequest<T>,String,HttpMethod,boolean,String);89a5f49f2260ad3611326b1408a36db0;PREEXISTING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;validarRespuesta(ResponseEntity<T> response);cdec9e218e8b48769437bdfcdff6428e;PENDING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java;validarRespuesta(ResponseEntity<T> response);cdec9e218e8b48769437bdfcdff6428e;EXCLUDED
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java;exists(String);1057a7fa9d23d2846e350b0ffbe0153b;PREEXISTING
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java;findByClave(String);d2b18aa3b00c48f714bf7251532e3536;PREEXISTING
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java;findById(String);5cc22e8d414c0c485ccc65c8ddbe52a3;PREEXISTING
