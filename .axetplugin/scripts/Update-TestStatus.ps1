@@ -257,14 +257,10 @@ try {
     
     Write-Log "Actualizando: $MethodSignature en $SourcePath" "INFO"
     
-    # Recalcular hash actual del método
-    Write-Log "Recalculando hash del método..." "INFO"
-    $newHash = Get-CurrentMethodHash -sourcePath $SourcePath -methodSignature $MethodSignature -jarPath $jarFullPath
-    Write-Log "Nuevo hash: $newHash" "INFO"
-    
-    # Determinar nuevo estado (DONE o ERROR_COMPILATION)
+    # PASO 1: Validar compilación PRIMERO (antes de intentar parsear)
     $newStatus = "DONE"
     $compilationResult = $null
+    $compilationPassed = $true
     
     if (-not $SkipCompilation) {
         # Detectar proyecto root y build tool
@@ -272,15 +268,39 @@ try {
         $buildTool = Get-BuildTool -projectRoot $projectRoot
         
         if ($null -eq $buildTool) {
-            Write-Log "No se detectó build tool (Maven/Gradle). Omitiendo validación de compilación." "WARN"
+            Write-Log "No se detectó build tool (Maven/Gradle). Intentando javac directo..." "WARN"
+            
+            # Fallback: Usar javac directamente
+            $fullPath = Join-Path $cwd $SourcePath
+            Write-Log "Validando sintaxis con javac: $fullPath" "INFO"
+            
+            try {
+                $javacOutput = & javac -Xlint:all $fullPath 2>&1
+                $javacExitCode = $LASTEXITCODE
+                
+                if ($javacExitCode -ne 0) {
+                    $compilationPassed = $false
+                    $newStatus = "ERROR_COMPILATION"
+                    Write-Log "javac detectó errores de compilación" "ERROR"
+                    $javacOutput | ForEach-Object { Write-Log "  $_" "ERROR" }
+                }
+                else {
+                    Write-Log "Validación de sintaxis con javac: OK" "SUCCESS"
+                }
+            }
+            catch {
+                Write-Log "javac no disponible o falló: $_" "WARN"
+                Write-Log "Continuando sin validación de compilación..." "WARN"
+            }
         }
         else {
             Write-Log "Proyecto root: $projectRoot" "INFO"
             
-            # Validar compilación
+            # Validar compilación con build tool
             $compilationResult = Test-ProjectCompilation -projectRoot $projectRoot -buildTool $buildTool
             
             if (-not $compilationResult.Success) {
+                $compilationPassed = $false
                 $newStatus = "ERROR_COMPILATION"
                 Write-Log "El test generado no compila correctamente" "ERROR"
                 Write-Log "Estado será marcado como: ERROR_COMPILATION" "WARN"
@@ -291,6 +311,27 @@ try {
         Write-Log "Validación de compilación omitida (SkipCompilation=true)" "WARN"
     }
     
+    # PASO 2: Recalcular hash SOLO si la compilación pasó
+    $newHash = $null
+    
+    if ($compilationPassed) {
+        Write-Log "Recalculando hash del método..." "INFO"
+        
+        try {
+            $newHash = Get-CurrentMethodHash -sourcePath $SourcePath -methodSignature $MethodSignature -jarPath $jarFullPath
+            Write-Log "Nuevo hash: $newHash" "INFO"
+        }
+        catch {
+            Write-Log "Error recalculando hash (esto es normal si hay errores de sintaxis): $_" "WARN"
+            Write-Log "Manteniendo hash existente del CSV" "INFO"
+            # El hash se tomará del CSV existente más abajo
+        }
+    }
+    else {
+        Write-Log "Compilación falló. Omitiendo recálculo de hash." "WARN"
+        Write-Log "El hash existente en el CSV se mantendrá." "INFO"
+    }
+    
     # Leer CSV actual
     $rows = Import-Csv -LiteralPath $fullCsvPath -Delimiter ';' -Encoding UTF8
     
@@ -298,6 +339,7 @@ try {
     $key = "$SourcePath|$MethodSignature"
     $found = $false
     $oldStatus = $null
+    $oldHash = $null
     
     foreach ($row in $rows) {
         $rowKey = "$($row.sourcePath)|$($row.method)"
@@ -305,9 +347,18 @@ try {
         if ($rowKey -eq $key) {
             $found = $true
             $oldStatus = $row.status
+            $oldHash = $row.contentHash
             
-            # Actualizar hash y estado
-            $row.contentHash = $newHash
+            # Actualizar hash solo si se pudo recalcular (compilación exitosa)
+            if ($null -ne $newHash) {
+                $row.contentHash = $newHash
+                Write-Log "Hash actualizado: $oldHash → $newHash" "INFO"
+            }
+            else {
+                Write-Log "Hash mantenido: $oldHash" "INFO"
+            }
+            
+            # Actualizar estado
             $row.status = $newStatus
             
             $statusColor = if ($newStatus -eq "DONE") { "SUCCESS" } else { "ERROR" }
@@ -343,9 +394,11 @@ try {
         MethodSignature    = $MethodSignature
         OldStatus          = $oldStatus
         NewStatus          = $newStatus
-        NewHash            = $newHash
+        OldHash            = $oldHash
+        NewHash            = if ($newHash) { $newHash } else { $oldHash }
+        HashUpdated        = ($null -ne $newHash)
         CsvPath            = $fullCsvPath
-        CompilationSuccess = if ($compilationResult) { $compilationResult.Success } else { $null }
+        CompilationSuccess = $compilationPassed
         CompilationOutput  = if ($compilationResult) { $compilationResult.Output } else { $null }
     }
 }
