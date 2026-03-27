@@ -3,8 +3,9 @@
   Actualiza el estado de un método en control.csv después de actualizar su test
   
 .DESCRIPTION
-  Recalcula el hash del método y actualiza su estado a DONE en control.csv.
-  Este script se ejecuta después de que la IA haya actualizado el test unitario.
+  Recalcula el hash del método, valida que el proyecto compila correctamente,
+  y actualiza su estado a DONE en control.csv.
+  Si la compilación falla, marca el estado como ERROR_COMPILATION.
   
 .PARAMETER SourcePath
   Ruta relativa del archivo fuente (ej: src/main/java/com/example/UserService.java)
@@ -17,6 +18,9 @@
   
 .PARAMETER ParserJar
   Ruta al JAR del parser
+  
+.PARAMETER SkipCompilation
+  Si es $true, omite la validación de compilación (default: $false)
   
 .OUTPUTS
   Retorna el nuevo estado del método
@@ -33,7 +37,10 @@ param(
     [string]$CsvPath = ".axetplugin/control.csv",
     
     [Parameter(Mandatory=$false)]
-    [string]$ParserJar = "tools/java-parser/target/java-method-parser.jar"
+    [string]$ParserJar = "tools/java-parser/target/java-method-parser.jar",
+    
+    [Parameter(Mandatory=$false)]
+    [bool]$SkipCompilation = $false
 )
 
 Set-StrictMode -Version Latest
@@ -112,6 +119,111 @@ function Get-CurrentMethodHash {
     }
 }
 
+function Get-BuildTool {
+    param([string]$projectRoot)
+    
+    # Detectar Maven
+    if (Test-Path (Join-Path $projectRoot "pom.xml")) {
+        return "maven"
+    }
+    
+    # Detectar Gradle
+    if ((Test-Path (Join-Path $projectRoot "build.gradle")) -or 
+        (Test-Path (Join-Path $projectRoot "build.gradle.kts"))) {
+        return "gradle"
+    }
+    
+    return $null
+}
+
+function Test-ProjectCompilation {
+    param(
+        [string]$projectRoot,
+        [string]$buildTool
+    )
+    
+    Write-Log "Validando compilación del proyecto..." "INFO"
+    Write-Log "Build tool detectado: $buildTool" "INFO"
+    
+    $originalLocation = Get-Location
+    
+    try {
+        Set-Location $projectRoot
+        
+        $compileCommand = switch ($buildTool) {
+            "maven" { 
+                "mvn test-compile -q"
+            }
+            "gradle" { 
+                if (Test-Path "gradlew.bat") {
+                    ".\gradlew.bat testClasses --quiet"
+                } else {
+                    "gradle testClasses --quiet"
+                }
+            }
+            default {
+                throw "Build tool no soportado: $buildTool"
+            }
+        }
+        
+        Write-Log "Ejecutando: $compileCommand" "INFO"
+        
+        # Capturar output completo
+        $output = Invoke-Expression $compileCommand 2>&1
+        $exitCode = $LASTEXITCODE
+        
+        if ($exitCode -eq 0) {
+            Write-Log "Compilación exitosa" "SUCCESS"
+            return @{
+                Success = $true
+                Output = $output
+            }
+        }
+        else {
+            Write-Log "Compilación falló (exit code: $exitCode)" "ERROR"
+            Write-Log "Output:" "ERROR"
+            $output | ForEach-Object { Write-Log "  $_" "ERROR" }
+            
+            return @{
+                Success = $false
+                Output = $output
+                ExitCode = $exitCode
+            }
+        }
+    }
+    catch {
+        Write-Log "Error durante compilación: $_" "ERROR"
+        return @{
+            Success = $false
+            Output = $_.Exception.Message
+            Error = $_
+        }
+    }
+    finally {
+        Set-Location $originalLocation
+    }
+}
+
+function Get-ProjectRoot {
+    param([string]$sourcePath)
+    
+    $cwd = (Get-Location).ProviderPath
+    $currentPath = Split-Path (Join-Path $cwd $sourcePath) -Parent
+    
+    # Buscar hacia arriba hasta encontrar pom.xml o build.gradle
+    while ($currentPath -and $currentPath -ne [System.IO.Path]::GetPathRoot($currentPath)) {
+        if ((Test-Path (Join-Path $currentPath "pom.xml")) -or 
+            (Test-Path (Join-Path $currentPath "build.gradle")) -or
+            (Test-Path (Join-Path $currentPath "build.gradle.kts"))) {
+            return $currentPath
+        }
+        $currentPath = Split-Path $currentPath -Parent
+    }
+    
+    # Si no se encuentra, usar el directorio actual
+    return $cwd
+}
+
 # -------------------------------------------------
 # Flujo Principal
 # -------------------------------------------------
@@ -150,6 +262,35 @@ try {
     $newHash = Get-CurrentMethodHash -sourcePath $SourcePath -methodSignature $MethodSignature -jarPath $jarFullPath
     Write-Log "Nuevo hash: $newHash" "INFO"
     
+    # Determinar nuevo estado (DONE o ERROR_COMPILATION)
+    $newStatus = "DONE"
+    $compilationResult = $null
+    
+    if (-not $SkipCompilation) {
+        # Detectar proyecto root y build tool
+        $projectRoot = Get-ProjectRoot -sourcePath $SourcePath
+        $buildTool = Get-BuildTool -projectRoot $projectRoot
+        
+        if ($null -eq $buildTool) {
+            Write-Log "No se detectó build tool (Maven/Gradle). Omitiendo validación de compilación." "WARN"
+        }
+        else {
+            Write-Log "Proyecto root: $projectRoot" "INFO"
+            
+            # Validar compilación
+            $compilationResult = Test-ProjectCompilation -projectRoot $projectRoot -buildTool $buildTool
+            
+            if (-not $compilationResult.Success) {
+                $newStatus = "ERROR_COMPILATION"
+                Write-Log "El test generado no compila correctamente" "ERROR"
+                Write-Log "Estado será marcado como: ERROR_COMPILATION" "WARN"
+            }
+        }
+    }
+    else {
+        Write-Log "Validación de compilación omitida (SkipCompilation=true)" "WARN"
+    }
+    
     # Leer CSV actual
     $rows = Import-Csv -LiteralPath $fullCsvPath -Delimiter ';' -Encoding UTF8
     
@@ -167,9 +308,10 @@ try {
             
             # Actualizar hash y estado
             $row.contentHash = $newHash
-            $row.status = "DONE"
+            $row.status = $newStatus
             
-            Write-Log "Estado actualizado: $oldStatus → DONE" "SUCCESS"
+            $statusColor = if ($newStatus -eq "DONE") { "SUCCESS" } else { "ERROR" }
+            Write-Log "Estado actualizado: $oldStatus → $newStatus" $statusColor
             break
         }
     }
@@ -197,12 +339,14 @@ try {
     
     # Retornar información del update
     return [PSCustomObject]@{
-        SourcePath      = $SourcePath
-        MethodSignature = $MethodSignature
-        OldStatus       = $oldStatus
-        NewStatus       = "DONE"
-        NewHash         = $newHash
-        CsvPath         = $fullCsvPath
+        SourcePath         = $SourcePath
+        MethodSignature    = $MethodSignature
+        OldStatus          = $oldStatus
+        NewStatus          = $newStatus
+        NewHash            = $newHash
+        CsvPath            = $fullCsvPath
+        CompilationSuccess = if ($compilationResult) { $compilationResult.Success } else { $null }
+        CompilationOutput  = if ($compilationResult) { $compilationResult.Output } else { $null }
     }
 }
 catch {
