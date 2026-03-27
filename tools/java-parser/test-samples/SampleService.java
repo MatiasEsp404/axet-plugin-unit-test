@@ -12,9 +12,14 @@ public class SampleService {
         System.out.println("Initializing service");
     }
     
-    // Método con un parámetro
+    // Método con un parámetro (modificado para stress test)
     public String processData(String input) {
-        return input.toUpperCase();
+        // Agregamos validación y logging
+        if (input == null || input.isEmpty()) {
+            return "";
+        }
+        System.out.println("Processing: " + input);
+        return input.toUpperCase().trim();
     }
     
     // Método con múltiples parámetros (sobrecarga)
