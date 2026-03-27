@@ -2,16 +2,53 @@
 
 Este documento contiene los prompts recomendados para trabajar con el sistema de generación automática de tests unitarios basado en el archivo de control CSV.
 
+> **📌 IMPORTANTE:** Este documento cubre **ambos workflows** del proyecto:
+> - **Workflow Orquestado** (Human-in-the-Loop con Run-Audit.ps1)
+> - **Workflow Agéntico** (LLM Autónomo)
+> 
+> Consulta [SCRIPTS_AUDIT.md](.axetplugin/docs/SCRIPTS_AUDIT.md) para entender las diferencias entre workflows.
+
 ---
 
-## 🎯 Prompt Principal (Recomendado)
+## 🤔 ¿Qué Workflow Debo Usar?
 
-### Para Sincronizar Tests de Métodos UPDATED
+### Usa el Workflow Orquestado Si...
+- ✅ Prefieres **control manual** sobre cada paso
+- ✅ Trabajas en un **proyecto nuevo o mediano** (<100 clases)
+- ✅ Necesitas **validación de compilación automática** (Maven/Gradle)
+- ✅ Quieres **revisar cada test** antes de confirmar
+- ✅ Estás **aprendiendo** el sistema
+
+**Prompt recomendado:**
+```
+Genera los tests para los métodos UPDATED en el CSV
+```
+
+### Usa el Workflow Agéntico Si...
+- ✅ Necesitas **automatización completa** sin intervención manual
+- ✅ Trabajas en un **proyecto grande** (100+ clases)
+- ✅ Prefieres **procesamiento en lote** eficiente
+- ✅ Confías en el **IDE para validar** compilación
+- ✅ Quieres **mantenimiento continuo** automatizado
+
+**Prompt recomendado:**
+```
+Genera tests unitarios para el proyecto en {carpeta_proyecto} siguiendo el workflow agéntico definido en .axetrules/tests-builder-agent.md
+```
+
+---
+
+## 🎯 Prompts Principales
+
+### A. Workflow Orquestado (Human-in-the-Loop)
+
+#### Para Sincronizar Tests de Métodos UPDATED
 
 ```
 Genera los tests para los métodos UPDATED en el CSV
 ```
 
+**Workflow:** Orquestado  
 **Cuándo usarlo:**
 - Cuando hay métodos marcados como `UPDATED` en `.axetplugin/control.csv`
 - Para sincronizar tests después de modificar el código fuente
@@ -24,11 +61,42 @@ Genera los tests para los métodos UPDATED en el CSV
 4. Genera o actualiza los tests correspondientes
 5. Marca como `DONE` en el CSV tras verificación exitosa
 
+**Nota:** El estado `UPDATED` solo existe en el Workflow Orquestado.
+
+---
+
+### B. Workflow Agéntico (LLM Autónomo)
+
+#### Para Generar Tests Automáticamente
+
+```
+Genera tests unitarios para el proyecto en {carpeta_proyecto} siguiendo el workflow agéntico definido en .axetrules/tests-builder-agent.md
+```
+
+**Workflow:** Agéntico  
+**Cuándo usarlo:**
+- Para automatización completa sin intervención manual
+- En proyectos grandes (100+ clases)
+- Para procesamiento en lote eficiente
+
+**Qué hace automáticamente:**
+1. Ejecuta `generate-control-csv.ps1` para escanear métodos
+2. Ejecuta `apply-exclusions.ps1` (opcional)
+3. Lee control.csv y filtra métodos `PENDING`
+4. Para cada método PENDING:
+   - Carga lineamientos apropiados
+   - Genera/actualiza test
+   - Verifica físicamente que el archivo existe
+   - Marca como `DONE` en el CSV
+5. Muestra resumen final con estadísticas
+
+**Nota:** Este workflow NO usa estados `UPDATED` ni `ERROR_COMPILATION`.
+
 ---
 
 ## 📝 Prompts Alternativos
 
-### Prompt Detallado (Con Contexto Explícito)
+### Prompt Detallado - Workflow Orquestado
 
 ```
 Necesito actualizar los tests unitarios para los métodos en estado UPDATED.
@@ -41,6 +109,7 @@ Por favor:
 Carpeta del proyecto: {ruta_del_proyecto}
 ```
 
+**Workflow:** Orquestado  
 **Cuándo usarlo:**
 - Primera vez usando el sistema
 - Cuando trabajas con múltiples proyectos
@@ -48,15 +117,48 @@ Carpeta del proyecto: {ruta_del_proyecto}
 
 ---
 
+### Prompt Detallado - Workflow Agéntico
+
+```
+Actúa como agente generador de tests unitarios según .axetrules/tests-builder-agent.md
+
+Proyecto: {ruta_del_proyecto}
+
+Ejecuta el flujo completo:
+1. Inicializa control.csv
+2. Aplica exclusiones automáticas
+3. Genera tests para todos los métodos PENDING
+4. Muestra resumen final
+```
+
+**Workflow:** Agéntico  
+**Cuándo usarlo:**
+- Primera vez usando el workflow agéntico
+- Para automatización completa
+- En proyectos grandes que requieren procesamiento masivo
+
+---
+
 ### Prompt para Clase Específica
 
+**Workflow Orquestado:**
 ```
 Genera tests para los métodos UPDATED de {NombreClase} en el CSV
 ```
 
-**Ejemplo:**
+**Workflow Agéntico:**
+```
+Genera tests para los métodos PENDING de {NombreClase} en el CSV
+```
+
+**Ejemplo (Orquestado):**
 ```
 Genera tests para los métodos UPDATED de UserService en el CSV
+```
+
+**Ejemplo (Agéntico):**
+```
+Genera tests para los métodos PENDING de UserService en el CSV
 ```
 
 **Cuándo usarlo:**
@@ -70,14 +172,20 @@ Genera tests para los métodos UPDATED de UserService en el CSV
 
 ### Ver Estado Actual
 
+**Workflow Orquestado:**
 ```
 Muestra qué métodos están en estado UPDATED
 ```
 
+**Workflow Agéntico:**
+```
+Muestra qué métodos están en estado PENDING
+```
+
 **Qué devuelve:**
-- Lista de métodos con cambios detectados
+- Lista de métodos que requieren atención
 - Clase a la que pertenecen
-- Hashes actuales vs anteriores
+- Hashes actuales vs anteriores (si aplica)
 
 ---
 
@@ -87,8 +195,13 @@ Muestra qué métodos están en estado UPDATED
 Muestra las estadísticas del control.csv
 ```
 
-**Qué devuelve:**
-- Total de métodos por estado (PENDING, DONE, PREEXISTING, EXCLUDED, UPDATED)
+**Qué devuelve (Workflow Orquestado):**
+- Total de métodos por estado (PENDING, UPDATED, DONE, PREEXISTING, ERROR_COMPILATION, EXCLUDED)
+- Progreso general del proyecto
+- Métodos pendientes por clase
+
+**Qué devuelve (Workflow Agéntico):**
+- Total de métodos por estado (PENDING, DONE, PREEXISTING, EXCLUDED)
 - Progreso general del proyecto
 - Métodos pendientes por clase
 
@@ -267,13 +380,27 @@ Muestra qué tests se generaron o actualizaron desde el último commit
 
 ### Estados del CSV
 
+#### Workflow Orquestado (6 estados)
+
 | Estado | Significado | Acción Requerida |
 |--------|-------------|------------------|
 | `PENDING` | Método nuevo detectado | Generar test |
 | `UPDATED` | Método modificado (hash cambió) | Actualizar test |
-| `DONE` | Test generado/actualizado en esta ejecución | Ninguna |
+| `DONE` | Test generado/actualizado y compila | Ninguna |
 | `PREEXISTING` | Test ya existía, código sin cambios | Ninguna |
+| `ERROR_COMPILATION` | Test generado pero no compila | Corregir errores |
 | `EXCLUDED` | No debe testearse según lineamientos | Ninguna |
+
+#### Workflow Agéntico (4 estados)
+
+| Estado | Significado | Acción Requerida |
+|--------|-------------|------------------|
+| `PENDING` | Método nuevo o modificado | Generar/actualizar test |
+| `DONE` | Test generado exitosamente | Ninguna |
+| `PREEXISTING` | Test existente sin cambios | Ninguna |
+| `EXCLUDED` | No debe testearse según lineamientos | Ninguna |
+
+> **Nota:** El workflow agéntico no usa estados `UPDATED` ni `ERROR_COMPILATION`. Los cambios se detectan vía hash y se marcan directamente como `PENDING`.
 
 ---
 
@@ -314,4 +441,4 @@ Este sistema está diseñado para cumplir con:
 
 **Última actualización:** 27/03/2026  
 **Versión del sistema:** 1.0  
-**Autor:** Agentic Workflow para Unit Test Maintenance
+**Autor:** Claudio Matías Correa Espínola
