@@ -1,7 +1,7 @@
 sourcePath;method;contentHash;status
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java;checkActiveMqConnection();94cc5de3a5946f99703d1293c9841151;PREEXISTING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java;checkHttpConnection(String,String);b83e9ee9a4fb13e969db13072df8031b;PREEXISTING
-../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java;getSecurityStatus();472662f933a2ec1136b41895bfb81743;PREEXISTING
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java;checkActiveMqConnection();94cc5de3a5946f99703d1293c9841151;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java;checkHttpConnection(String,String);b83e9ee9a4fb13e969db13072df8031b;EXCLUDED
+../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/clients/HealthCheckClientImpl.java;getSecurityStatus();472662f933a2ec1136b41895bfb81743;EXCLUDED
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/config/AsyncConfig.java;notificacionTadExecutor();1586fa717108deceaf24467528b2c6bd;EXCLUDED
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/config/RestTemplateConfig.java;restTemplate();ddc58bc7722615d8e0c7599784f3d6a7;EXCLUDED
 ../rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/events/listener/NotificacionEventListener.java;handleNotificacion(NotificacionEvent);f4b094414c75ffbefbb7e3fe515b220a;EXCLUDED
