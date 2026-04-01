@@ -54,10 +54,20 @@ IMPORTANTE:
 2. Itera fila por fila
 3. Para cada fila donde status == PENDING, ejecutar SIEMPRE estos pasos en orden:
    
-   a) Lee el archivo sourcePath usando read_file
-   b) Detecta el tipo de clase (service, controller, dto, etc.)
-   c) Lee siempre los lineamientos generales → .axetplugin/skills/lineamientos-generales/SKILL.md
-   d) Según el tipo de clase detectado, leer SOLO el lineamiento específico:
+   a) Identifica el pom.xml del módulo correspondiente:
+      - Basándote en sourcePath, localiza el pom.xml del módulo actual
+      - Lee las dependencias (groupId, artifactId, version) de testing
+      - Usa ÚNICAMENTE las versiones reales del pom.xml del módulo
+      - Esto previene alucinaciones sobre versiones de dependencias
+   b) Lee el archivo sourcePath usando read_file
+   c) Detecta el tipo de clase (service, controller, dto, etc.)
+   d) Identifica clases Utils y Enums referenciadas:
+      - Busca imports de clases que terminen en "Utils", "Util", "Helper" o sean Enums
+      - Usa search_files con patrón regex si es necesario localizar estas clases
+      - Lee el contenido de las clases identificadas para tenerlas disponibles
+      - Considéralas para uso en el test cuando mejoren cohesión
+   e) Lee siempre los lineamientos generales → .axetplugin/skills/lineamientos-generales/SKILL.md
+   f) Según el tipo de clase detectado, leer SOLO el lineamiento específico:
 
       - configurations / @Configuration   → lineamientos-configuraciones/SKILL.md
       - controllers / @RestController     → lineamientos-controllers/SKILL.md
@@ -72,20 +82,21 @@ IMPORTANTE:
         
       Todos los archivos están en: .axetplugin/skills/
         
-   e) Todo tu comportamiento debe basarse únicamente en los lineamientos cargados.
+   g) Todo tu comportamiento debe basarse únicamente en los lineamientos cargados.
       - Aplica primero el lineamiento específico del tipo de clase y luego los lineamientos generales.
       - No inventes reglas adicionales.
 
-   f) Determina si según los lineamientos debe testearse  
-   g) Si los lineamientos indican NO testear →  
+   h) Determina si según los lineamientos debe testearse  
+   i) Si los lineamientos indican NO testear →  
         - Marca status = EXCLUDED
         - Actualiza el CSV  
         - Continúa con la siguiente fila  
 
-   h) Si debe generarse test:
+   j) Si debe generarse test:
 
         - Genera exactamente UN archivo de test
-        - Aplica únicamente los lineamientos cargados en los puntos c) y d)
+        - Aplica únicamente los lineamientos cargados en los puntos e) y f)
+        - Utiliza clases Utils/Enums identificadas cuando aporten valor
         - Usa anotaciones indicadas en lineamientos
         - Respeta naming conventions
         - No uses anotaciones prohibidas
@@ -139,3 +150,7 @@ Ubicación: src/test/java/
 - Ejecuta todo automáticamente
 - Genera un test por iteración del CSV
 - Nunca marques una fila como DONE si el archivo correspondiente no existe físicamente.
+- **ÚNICAMENTE** estas versiones:
+  - `junit-jupiter-api`: 5.14.2 o 6.0.2
+  - `mockito-core`: 5.21.0
+  - `mockito-junit-jupiter`: 5.21.0 (para integración)
