@@ -111,15 +111,23 @@ IMPORTANTE:
           1. Verifica que el archivo fue creado correctamente usando list_files
              sobre la ruta destino:
              src/test/java/{paquete}/{ClassName}Test.java
-          2. SOLO si la verificacion es exitosa:
+          
+          2. Ejecuta los tests de la clase específica:
+             - Comando: mvn -f {ruta_modulo}/pom.xml test -Dtest={ClassName}Test
+             - NO uses "mvn verify" (genera spam en consola)
+             - Verifica que:
+               * El proyecto compile correctamente
+               * Todos los tests de la clase pasen exitosamente
+          
+          3. SOLO si la creación del archivo Y la ejecución de tests son exitosas:
             - Marca status = DONE
             - Actualiza el CSV inmediatamente
            
           Si la actualización del CSV mediante replace_in_file falla por error de coincidencia exacta, sobrescribe el archivo completo usando write_to_file con los valores actualizados.
 
-          3. Si la verificación falla:
+          4. Si alguna verificación falla:
             - No modificar el CSV
-            - Mostrar: "FAILED (validation error)"
+            - Mostrar: "FAILED (creation/compilation/test error)"
 
         - Muestra progreso:
           "[X/Y] {ClassName}Test.java generado"
