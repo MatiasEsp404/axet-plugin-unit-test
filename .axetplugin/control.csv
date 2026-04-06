@@ -37,7 +37,7 @@ C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/ser
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/GeneroService.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/HealthcheckService.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/HistorialSolicitudService.java,PENDING
-C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/AuthServiceImpl.java,PENDING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/AuthServiceImpl.java,DONE
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/CircunscripcionServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitalizacionServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/DigitizeService.java,PENDING
@@ -46,7 +46,7 @@ C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/ser
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/FlujoServiceImpl.java,PREEXISTING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GedoServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/GeneroServiceImpl.java,PENDING
-C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HealthcheckServiceImpl.java,PENDING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HealthcheckServiceImpl.java,DONE
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/HistorialSolicitudServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/MateriaServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/MessageSpServiceImpl.java,PENDING
@@ -62,7 +62,7 @@ C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/ser
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RepositorioDocumentoServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RestHelperServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/RolServiceImpl.java,PENDING
-C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,DONE
+C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/SolicitudServiceImpl.java,PREEXISTING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/StdServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java,PENDING
@@ -94,3 +94,4 @@ C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/ser
 C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/EstadisticasServiceImplTest.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/FlujoServiceImplTest.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/OrigenServiceImplTest.java,PENDING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/SolicitudServiceImplTest.java,PENDING

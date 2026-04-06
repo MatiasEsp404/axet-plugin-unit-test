@@ -94,9 +94,35 @@ IMPORTANTE:
 
    j) Si debe generarse test:
 
-        - Genera exactamente UN archivo de test
-        - Aplica únicamente los lineamientos cargados en los puntos e) y f)
-        - Utiliza clases Utils/Enums identificadas cuando aporten valor
+        - EVALÚA la complejidad de la clase:
+          * Clase grande: >200 líneas de código
+          * Lógica compleja: múltiples métodos con condicionales anidados, manejo de excepciones complejo, muchas dependencias
+          
+        - Si la clase es grande O tiene lógica compleja:
+          
+          1. PLANIFICACIÓN: Crea un plan de iteraciones
+             - Analiza métodos y agrúpalos por funcionalidad
+             - Define iteraciones lógicas (ej: "Iteración 1: métodos CRUD básicos", "Iteración 2: validaciones", etc.)
+             - Cada iteración debe tener tests específicos claramente identificados
+             - Muestra el plan al usuario para transparencia
+          
+          2. IMPLEMENTACIÓN ITERATIVA:
+             - Implementa UNA iteración a la vez
+             - Genera los tests de esa iteración
+             - Ejecuta y valida que compilen y pasen
+             - Continúa con la siguiente iteración
+             - Al completar cada iteración, muestra: "[Iteración X/Y completada] {ClassName}Test.java"
+          
+          3. ACTUALIZACIÓN DEL CSV:
+             - SOLO marca status = DONE cuando TODAS las iteraciones estén completas
+             - No actualices el CSV entre iteraciones parciales
+        
+        - Si la clase es simple:
+          - Genera el test completo en una sola iteración
+        
+        - En ambos casos, aplica:
+          * Lineamientos cargados en los puntos e) y f)
+          * Clases Utils/Enums identificadas cuando aporten valor
         - Usa anotaciones indicadas en lineamientos
         - Respeta naming conventions
         - No uses anotaciones prohibidas
