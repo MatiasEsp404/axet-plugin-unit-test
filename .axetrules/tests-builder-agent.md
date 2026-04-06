@@ -123,6 +123,14 @@ IMPORTANTE:
         - En ambos casos, aplica:
           * Lineamientos cargados en los puntos e) y f)
           * Clases Utils/Enums identificadas cuando aporten valor
+        
+        - REGISTRO DE MÉTODOS NO TESTEADOS:
+          * Si un método NO puede ser testeado (lógica muy compleja, dependencias imposibles de mockear, etc.):
+            1. Registra el método en .axetplugin/metodos-no-testeados.md
+            2. Formato: | Clase | Método | Motivo | Recomendación |
+            3. Incluye motivo específico y recomendación de acción (refactorizar, test de integración, etc.)
+            4. No detengas la generación del resto de tests de la clase
+        
         - Usa anotaciones indicadas en lineamientos
         - Respeta naming conventions
         - No uses anotaciones prohibidas
