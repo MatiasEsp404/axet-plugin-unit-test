@@ -66,10 +66,10 @@ C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/ser
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/StdServiceImpl.java,PREEXISTING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TadServiceImpl.java,PREEXISTING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImpl.java,PENDING
-C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoWebServiceImpl.java,DONE
-C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TitularServiceImpl.java,DONE
-C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TopograficoServiceImpl.java,DONE
-C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/UsuarioServiceImpl.java,PENDING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TipoDocumentoWebServiceImpl.java,PREEXISTING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TitularServiceImpl.java,PREEXISTING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/TopograficoServiceImpl.java,PREEXISTING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/impl/UsuarioServiceImpl.java,DONE
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/MateriaService.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/MessageSpService.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/main/java/ar/gob/gcaba/service/NotificacionAsincronaService.java,PENDING
@@ -119,3 +119,6 @@ C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/ser
 C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/StdServiceImplTest.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/TadServiceImplTest.java,PENDING
 C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/TipoDocumentoServiceImplTest.java,PENDING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/TipoDocumentoWebServiceImplTest.java,PENDING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/TitularServiceImplTest.java,PENDING
+C:/Proyectos/rce-partidas-back/source/sp-business/src/test/java/ar/gob/gcaba/service/impl/TopograficoServiceImplTest.java,PENDING
