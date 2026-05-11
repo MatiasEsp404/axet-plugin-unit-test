@@ -18,7 +18,7 @@ Un script en **PowerShell** responsable de escanear el código fuente Java del p
 ### 2. Reglas Base del Agente (`tests-builder-agent.md`)
 Las instrucciones "núcleo" (System Prompt o rol base) del agente Axet. Le indican cómo interactuar con el archivo de control generado por el script de PowerShell:
 - Itera sobre el `control.csv` buscando los métodos en estado `PENDING`.
-- Genera (o actualiza) los archivos de pruebas (`*Test.java`) según las tecnologías limitadas: **JUnit Jupiter 5.14/6.0** y **Mockito 5.21**.
+- Genera (o actualiza) los archivos de pruebas (`*Test.java`) según las tecnologías limitadas: **JUnit 4.8.1** y **Mockito 2.28.2**.
 - Se encarga de cambiar el estado a `DONE` cuando ha validado que el código de la prueba se ha guardado físicamente en disco.
 
 ### 3. Lineamientos por Capa (`.axetplugin/skills/`)
