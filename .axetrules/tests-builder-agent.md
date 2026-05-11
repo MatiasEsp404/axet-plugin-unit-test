@@ -100,11 +100,24 @@ IMPORTANTE:
           
         - Si la clase es grande O tiene lógica compleja:
           
-          1. PLANIFICACIÓN: Crea un plan de iteraciones
-             - Analiza métodos y agrúpalos por funcionalidad
-             - Define iteraciones lógicas (ej: "Iteración 1: métodos CRUD básicos", "Iteración 2: validaciones", etc.)
-             - Cada iteración debe tener tests específicos claramente identificados
-             - Muestra el plan al usuario para transparencia
+          1. PLANIFICACIÓN: Genera un documento markdown de planificación
+             - Ubicación: docs/planes/{ClassName}-plan.md
+             - Analiza la clase y documenta:
+               * Nombre de la clase y líneas de código totales
+               * Tipo de clase (ej: @Service, @Controller, etc.)
+               * Nivel de complejidad: BAJA, MEDIA o ALTA
+               * Lista completa de dependencias identificadas (campos inyectados)
+               * División en iteraciones lógicas numeradas
+             - Para cada iteración incluye:
+               * Título descriptivo de la funcionalidad agrupada
+               * Lista de métodos a testear en esa iteración
+               * Estimación de tests: "Tests: ~X-Y tests"
+             - Al final incluye: "Total estimado: N iteraciones, ~X-Y tests unitarios"
+             - Formato: Usa markdown limpio con headers ##, ### y listas con `-`
+             - El documento debe ser breve, directo y técnico
+             - Crea el directorio docs/planes/ si no existe
+             - Guarda el plan antes de iniciar implementación
+             - Muestra al usuario: "Plan generado: docs/planes/{ClassName}-plan.md"
           
           2. IMPLEMENTACIÓN ITERATIVA:
              - Implementa UNA iteración a la vez
